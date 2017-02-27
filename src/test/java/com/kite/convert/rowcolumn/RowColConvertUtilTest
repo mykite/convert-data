@@ -1,0 +1,42 @@
+package com.kite.convert.rowcolumn;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Test;
+
+import com.kite.convert.rowcolumn.bean.ObjectRow;
+import com.kite.convert.rowcolumn.bean.StringRow;
+import com.kite.convert.rowcolumn.util.RowListConvertUtil;
+
+
+public class RowColConvertUtilTest {
+
+	@Test
+	public void testStringRow() {
+		long starttime = System.currentTimeMillis();
+		List<StringRow> stringRows = new ArrayList<StringRow>();
+		stringRows.add(new StringRow("name", "kite"));
+		stringRows.add(new StringRow("job", "softwareDev"));
+		stringRows.add(new StringRow("test_", null));
+		Emp emp = RowListConvertUtil.rowConvertBean(stringRows, Emp.class);
+		long endtime = System.currentTimeMillis();
+		System.out.println(emp);
+		System.out.println("time:" + (endtime-starttime));
+	}
+	
+	@Test
+	public void testObjectRow() {
+		long starttime = System.currentTimeMillis();
+		List<ObjectRow> stringRows = new ArrayList<ObjectRow>();
+		stringRows.add(new ObjectRow("name", "kite")); 
+		stringRows.add(new ObjectRow("job", "softwareDev"));
+		stringRows.add(new ObjectRow("test_", "test"));
+		stringRows.add(new ObjectRow("date", new Date()));
+		Emp emp = RowListConvertUtil.rowConvertBean(stringRows, Emp.class);
+		long endtime = System.currentTimeMillis();
+		System.out.println(emp);
+		System.out.println("time:" + (endtime-starttime));
+	}
+}
